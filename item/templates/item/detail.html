@@ -1,0 +1,51 @@
+{% extends 'core/base.html' %}
+
+
+{% block title %} {{item.name}} {% endblock %}
+
+{% block content %}
+
+<div class="item-info-container">
+    <div class="info-image">
+        <img src="{{ item.image.url }}" class="detail-image">
+    </div>
+
+    <div class="info-details">
+        <h1>{{item.name}}</h1>
+        <p class="price-item"><strong>Price: </strong>${{item.price}}</p>
+        <p class="price-item"><strong>Seller: </strong>{{item.created_by.username}}</p> 
+
+        {% if item.description %}
+            <p class="item-description">
+                <strong>Description</strong><br>
+                {{item.description}}
+            </p>
+        {% endif %}
+
+        <a href="{% url 'core:contact' %}" class="contact-btn">Contact seller</a>
+    </div>
+</div>
+
+<div class="container">
+    <h2 class="container-text">Related Items</h2>
+
+    <div class="newest-items-display">
+        {% for item in related_items %}
+        <div class="item-container">
+            <a href="{% url 'item:detail' item.id %}">
+                <div>
+                    <img src="{{item.image.url}}" class ="item-img">
+                </div>
+                <div class="item-details">
+                    <h2>{{item.name}}</h2>
+                    <p>Price: ${{item.price}}</p>
+                </div>
+            </a>
+        </div>
+
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'core/base.html' %}
+<!-- {% load static %} -->
+
+
+{% block title %}Welcome {% endblock %}
+<!-- <link rel="stylesheet" href="{% static 'css/index.css' %}"> -->
+
+
+
+{% block content %}
+
+    <div class="container">
+        <h2 class="container-text">Newest Items</h2>
+
+        <div class="newest-items-display">
+            {% for item in items %}
+            <div class="item-container">
+                <a href="{% url 'item:detail' item.id %}">
+                    <div>
+                        <img src="{{item.image.url}}" class ="item-img">
+                    </div>
+                    <div class="item-details">
+                        <h2>{{item.name}}</h2>
+                        <p>Price: ${{item.price}}</p>
+                    </div>
+                </a>
+            </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="container-text">Categories</h2>
+
+        <div class="category-display">
+            {% for category in categories %}
+            <div class="category-container">
+
+                <a href="#">
+                    <div class="category-details">
+                        <h2>{{category.name}}</h2>
+                        <p>{{category.items.count}} items</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+
+
+    </div>
+
+
+{% endblock %}
+

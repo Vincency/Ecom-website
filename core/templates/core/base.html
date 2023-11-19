@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title>{% block title %} {% endblock %} | Puddle</title>
+</head>
+<body>
+    
+    
+    
+    <nav class="navigation">
+
+        <div class="menu">
+            <a class="logo">Puddle</a>
+            <input type="text" placeholder="Search..." class="search-box" name="Search">
+            <ul class="nav-links">
+                <li><a href="{% url 'item:new' %}">New item</a></li>
+                <li><a href="#">Browse</a></li>
+
+                {% if request.user.is_authenticated %}
+                    <li><a href="#" class="sign-up">Inbox</a></li>
+                    <li><a href="#" class="log-in">Dashboard</a></li>
+                {% else %}
+                    <li><a href="{% url 'core:signup' %}" class="sign-up">Sign up</a></li>
+                    <li><a href="{% url 'core:login' %}" class="log-in">Log in</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer class="footer">
+        <div class="info">
+            <h3 class="about">About</h3>
+
+            <p class="about-info">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis, tenetur!</p>
+        
+        </div>
+
+        <ul class="footer-links">
+            <li><a href="{% url 'core:about' %}">About</a></li>
+            <li><a href="{% url 'core:contact' %}">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Term of Service</a></li>
+        </ul>
+    </footer>
+
+</body>
+</html>
