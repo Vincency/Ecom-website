@@ -6,4 +6,10 @@ from .models import Item
 class NewItemForm(forms.ModelForm):
     class meta:
         model = Item
-        fields = '__all__'
+        fields = ('category', 'name', 'description', 'price', 'image',)
+
+    widgets = {
+        'category': forms.Select(attrs={
+            'class': 'category-class',
+        })
+    }
